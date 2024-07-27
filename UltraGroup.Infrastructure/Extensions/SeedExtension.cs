@@ -1,9 +1,8 @@
-﻿using UltraGroup.Application.Ports;
-using UltraGroup.Domain.Customers.Port;
-using UltraGroup.Domain.Products.Port;
-using UltraGroup.Infrastructure.DataSource.Seed;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using UltraGroup.Application.Ports;
+using UltraGroup.Domain.Agents.Port;
+using UltraGroup.Infrastructure.DataSource.Seed;
 
 namespace UltraGroup.Infrastructure.Extensions
 {
@@ -15,13 +14,9 @@ namespace UltraGroup.Infrastructure.Extensions
             var services = scope.ServiceProvider;
             var unitOfWork = services.GetRequiredService<IUnitOfWork>();
 
-            var productRepository = services.GetRequiredService<IProductRepository>();
-            var initializerProduct = new InitializerProduct(productRepository, unitOfWork);
-            initializerProduct.CreateAsync().Wait();
-
-            var customerRepository = services.GetRequiredService<ICustomerRepository>();
-            var initializerCustomer = new InitializerCustomer(customerRepository, unitOfWork);
-            initializerCustomer.CreateAsync().Wait();
+            var agentRepository = services.GetRequiredService<IAgentRepository>();
+            var initializerAgent = new InitializerAgent(agentRepository, unitOfWork);
+            initializerAgent.CreateAsync().Wait();
 
             return host;
         }

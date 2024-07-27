@@ -1,9 +1,8 @@
-﻿using UltraGroup.Application.Invoice.Command.Factory;
+﻿using Microsoft.Extensions.DependencyInjection;
 using UltraGroup.Application.Ports;
 using UltraGroup.Domain.Common;
 using UltraGroup.Infrastructure.Adapters;
 using UltraGroup.Infrastructure.Ports;
-using Microsoft.Extensions.DependencyInjection;
 
 namespace UltraGroup.Infrastructure.Extensions;
 
@@ -12,8 +11,6 @@ public static class AutoLoadServices
     public static IServiceCollection AddServices(this IServiceCollection services)
     {
         services.AddTransient(typeof(IRepository<>), typeof(GenericRepository<>));
-
-        services.AddTransient(typeof(InvoiceFactory));
 
         services.AddTransient<IUnitOfWork, UnitOfWork>();
 

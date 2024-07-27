@@ -1,4 +1,5 @@
-﻿using UltraGroup.Domain.Exceptions;
+﻿using System.Text.RegularExpressions;
+using UltraGroup.Domain.Exceptions;
 
 namespace UltraGroup.Domain.Common
 {
@@ -61,6 +62,19 @@ namespace UltraGroup.Domain.Common
         public static Guid ValidateNotEmpty(this Guid value, string message)
         {
             if (value == Guid.Empty)
+            {
+                throw new RequiredException(message);
+            }
+            return value;
+        }
+
+        public static string ValidateEmail(this string value, string message)
+        {
+            Regex EmailRegex = new(
+             @"^[^@\s]+@[^@\s]+\.[^@\s]+$",
+             RegexOptions.IgnoreCase | RegexOptions.Compiled);
+
+            if (!EmailRegex.IsMatch(value))
             {
                 throw new RequiredException(message);
             }

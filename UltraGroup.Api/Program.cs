@@ -1,8 +1,3 @@
-using UltraGroup.Api.ApiHandlers;
-using UltraGroup.Api.Filters;
-using UltraGroup.Api.Middleware;
-using UltraGroup.Infrastructure.DataSource;
-using UltraGroup.Infrastructure.Extensions;
 using FluentValidation;
 using MediatR;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
@@ -12,6 +7,11 @@ using Prometheus;
 using Serilog;
 using Serilog.Debugging;
 using System.Reflection;
+using UltraGroup.Api.ApiHandlers;
+using UltraGroup.Api.Filters;
+using UltraGroup.Api.Middleware;
+using UltraGroup.Infrastructure.DataSource;
+using UltraGroup.Infrastructure.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 var config = builder.Configuration;
@@ -73,7 +73,7 @@ app.UseRouting().UseEndpoints(endpoint =>
 });
 
 app.MapGroup("/api/invoice")
-    .MapInvoice()
+    .MapAgent()
     .AddEndpointFilterFactory(ValidationFilter.ValidationFilterFactory)
     .WithTags("Invoices");
 

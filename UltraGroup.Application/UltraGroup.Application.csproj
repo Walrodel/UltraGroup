@@ -16,4 +16,8 @@
     <ProjectReference Include="..\UltraGroup.Domain\UltraGroup.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Agents\Query\Dto\" />
+  </ItemGroup>
+
 </Project>

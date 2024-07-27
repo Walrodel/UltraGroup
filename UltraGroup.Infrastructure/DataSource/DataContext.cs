@@ -1,8 +1,6 @@
-﻿using UltraGroup.Domain.Common;
-using UltraGroup.Domain.Customers.Entity;
-using UltraGroup.Domain.Invoices.Model.Entity;
-using UltraGroup.Domain.Products.Entity;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
+using UltraGroup.Domain.Agents.Entity;
+using UltraGroup.Domain.Common;
 
 namespace UltraGroup.Infrastructure.DataSource;
 
@@ -18,10 +16,7 @@ public class DataContext(DbContextOptions<DataContext> options) : DbContext(opti
 
         modelBuilder.ApplyConfigurationsFromAssembly(typeof(DataContext).Assembly);
 
-        modelBuilder.Entity<Product>();
-        modelBuilder.Entity<Customer>();
-        modelBuilder.Entity<Invoice>();
-        modelBuilder.Entity<ProductInvoice>();
+        modelBuilder.Entity<Agent>();
 
         foreach (var entityType in modelBuilder.Model.GetEntityTypes())
         {
