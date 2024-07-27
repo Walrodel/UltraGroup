@@ -72,11 +72,14 @@ app.UseRouting().UseEndpoints(endpoint =>
     endpoint.MapMetrics();
 });
 
-app.MapGroup("/api/invoice")
+app.MapGroup("/api/agents")
     .MapAgent()
     .AddEndpointFilterFactory(ValidationFilter.ValidationFilterFactory)
-    .WithTags("Invoices");
-
+    .WithTags("Agents");
+app.MapGroup("/api/hotels")
+    .MapHotel()
+    .AddEndpointFilterFactory(ValidationFilter.ValidationFilterFactory)
+    .WithTags("Hotels");
 app.Seed();
 
 app.Run();

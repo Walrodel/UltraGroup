@@ -32,8 +32,8 @@ public static class AgentApi
             await mediator.Send(new UpdateAgentCommand(id, agent.Name, agent.Email, agent.Phone));
             return Results.Ok();
         })
-       .Produces(statusCode: StatusCodes.Status201Created)
-       .WithSummary("Create new agent")
+       .Produces(statusCode: StatusCodes.Status200OK)
+       .WithSummary("Update agent")
        .WithOpenApi();
 
         return (RouteGroupBuilder)routeHandler;
