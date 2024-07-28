@@ -84,6 +84,11 @@ app.MapGroup("/api/rooms")
     .MapRoom()
     .AddEndpointFilterFactory(ValidationFilter.ValidationFilterFactory)
     .WithTags("Rooms");
+app.MapGroup("/api/travelers")
+    .MapTraveler()
+    .AddEndpointFilterFactory(ValidationFilter.ValidationFilterFactory)
+    .WithTags("Travelers");
+
 app.Seed();
 
 app.Run();
