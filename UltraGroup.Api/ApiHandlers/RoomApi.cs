@@ -27,6 +27,16 @@ public static class RoomApi
        .WithSummary("Get room by id")
        .WithOpenApi();
 
+        routeHandler.MapGet("/Availables", async (IMediator mediator, DateOnly CheckInDate, DateOnly CheckOutDate, short NumberOfPersons, string City) =>
+        {
+            var rooms = await mediator.Send(new GetRoomsAvailableQuery(CheckInDate, CheckOutDate, NumberOfPersons, City));
+            return Results.Ok(rooms);
+        })
+       .Produces(statusCode: StatusCodes.Status200OK)
+       .Produces(statusCode: StatusCodes.Status204NoContent)
+       .WithSummary("Get rooms availables")
+       .WithOpenApi();
+
         routeHandler.MapPut("/{id}", async (IMediator mediator, CreateRoomCommand room, Guid id) =>
         {
             await mediator.Send(new UpdateRoomCommand(id, room.Number, room.CosBaseCost, room.Tax, room.Type, room.State, room.Location, room.HotelId));

@@ -11,8 +11,7 @@ namespace UltraGroup.Application.Hotels
         {
             CreateMap<CreateHotelCommand, HotelCreateDto>();
             CreateMap<UpdateHotelCommand, HotelCreateDto>();
-            CreateMap<Hotel, HotelDto>()
-                .ForMember(dest => dest.AgentId, config => config.MapFrom(src => src.Agent.Id));
+            CreateMap<Hotel, HotelDto>();
         }
     }
 }

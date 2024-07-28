@@ -88,6 +88,10 @@ app.MapGroup("/api/travelers")
     .MapTraveler()
     .AddEndpointFilterFactory(ValidationFilter.ValidationFilterFactory)
     .WithTags("Travelers");
+app.MapGroup("/api/reservations")
+    .MapReservation()
+    .AddEndpointFilterFactory(ValidationFilter.ValidationFilterFactory)
+    .WithTags("Reservations");
 
 app.Seed();
 

@@ -32,6 +32,15 @@ namespace UltraGroup.Domain.Common
             return value;
         }
 
+        public static short ValidateGreaterThanZero(this short value, string message)
+        {
+            if (value <= 0)
+            {
+                throw new RequiredException(message);
+            }
+            return value;
+        }
+
         public static int ValidateGreaterThanZero(this int value, string message)
         {
             if (value <= 0)

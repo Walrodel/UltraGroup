@@ -5,26 +5,26 @@ using UltraGroup.Infrastructure.Ports;
 namespace UltraGroup.Infrastructure.Adapters
 {
     [Repository]
-    public class TravelerSqlRepository(IRepository<Traveler> roomRepository) : ITravelerRepository
+    public class TravelerSqlRepository(IRepository<Traveler> travelerRepository) : ITravelerRepository
     {
         public Task<Traveler> AddAsync(Traveler traveler)
         {
-            return roomRepository.AddAsync(traveler);
+            return travelerRepository.AddAsync(traveler);
         }
 
         public async Task<Traveler> GetByIdAsync(Guid id, string? include = null)
         {
-            return await roomRepository.GetOneAsync(id, include);
+            return await travelerRepository.GetOneAsync(id, include);
         }
 
         public async Task<int> GetCountAsync()
         {
-            return await roomRepository.GetCountAsync();
+            return await travelerRepository.GetCountAsync();
         }
 
         public async Task UpdateAsync(Traveler traveler)
         {
-            roomRepository.UpdateAsync(traveler);
+            travelerRepository.UpdateAsync(traveler);
             await Task.CompletedTask;
         }
     }

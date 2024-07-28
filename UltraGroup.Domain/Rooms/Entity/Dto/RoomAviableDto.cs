@@ -1,8 +1,6 @@
-﻿using UltraGroup.Domain.Hotels.Entity.Dto;
-
-namespace UltraGroup.Domain.Rooms.Entity.Dto
+﻿namespace UltraGroup.Domain.Rooms.Entity.Dto
 {
-    public record RoomDto
+    public record RoomAviableDto
     {
         public Guid Id { get; set; }
         public int Number { get; set; }
@@ -11,6 +9,8 @@ namespace UltraGroup.Domain.Rooms.Entity.Dto
         public TypeRoom Type { get; set; }
         public string Location { get; set; } = default!;
         public StateRoom State { get; set; }
-        public HotelDto Hotel { get; set; } = default!;
+        public string NameHotel { get; set; } = default!;
+        public string City { get; set; } = default!;
+        public string Address { get; set; } = default!;
     }
 }
