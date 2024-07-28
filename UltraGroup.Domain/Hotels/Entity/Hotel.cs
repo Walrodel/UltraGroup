@@ -65,7 +65,8 @@ namespace UltraGroup.Domain.Hotels.Entity
 
         public Agent Agent
         {
-            get => agent; set
+            get => agent;
+            set
             {
                 value.ValidateNull("The agent does not exist.");
                 agent = value;

@@ -80,6 +80,10 @@ app.MapGroup("/api/hotels")
     .MapHotel()
     .AddEndpointFilterFactory(ValidationFilter.ValidationFilterFactory)
     .WithTags("Hotels");
+app.MapGroup("/api/rooms")
+    .MapRoom()
+    .AddEndpointFilterFactory(ValidationFilter.ValidationFilterFactory)
+    .WithTags("Rooms");
 app.Seed();
 
 app.Run();
