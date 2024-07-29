@@ -10,6 +10,7 @@ namespace UltraGroup.Application.Reservations.Command
         CreateReservationService createReservationService,
         ReservationFactory reservationFactory,
         IMapper mapper,
+        IEmailNotification emailNotification,
         IUnitOfWork unitOfWork) : IRequestHandler<CreateReservationCommand, Guid>
     {
         public async Task<Guid> Handle(CreateReservationCommand request, CancellationToken cancellationToken)
@@ -18,6 +19,8 @@ namespace UltraGroup.Application.Reservations.Command
             var reservation = await reservationFactory.Create(reservtioCreate);
             var id = await createReservationService.ExecuteAsync(reservation);
             await unitOfWork.SaveAsync();
+
+            await emailNotification.SendEmailAsync(reservation.Travelers.First().Traveler.Email, "Reservation", "Reservation request");
             return id;
         }
     }

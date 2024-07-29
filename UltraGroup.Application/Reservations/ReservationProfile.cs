@@ -13,6 +13,7 @@ namespace UltraGroup.Application.Reservations
             CreateMap<CreateReservationCommand, ReservationCreateDto>();
             CreateMap<EmergencyContact, EmergencyContactDto>();
             CreateMap<Reservation, ReservationDto>();
+            CreateMap<ReservatioinTreavelers, ReservatioinTreavelersDto>();
         }
     }
 }

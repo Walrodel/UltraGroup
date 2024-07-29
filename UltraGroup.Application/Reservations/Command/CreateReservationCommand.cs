@@ -7,7 +7,7 @@ namespace UltraGroup.Application.Reservations.Command
         DateOnly CheckInDate,
         DateOnly CheckOutDate,
         short NumberOfPersons,
-        Guid TravelerId,
+        IEnumerable<Guid> Travelers,
         Guid RoomId,
         EmergencyContactDto EmergencyContact
         ) : IRequest<Guid>;

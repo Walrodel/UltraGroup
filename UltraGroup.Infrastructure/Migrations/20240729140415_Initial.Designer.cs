@@ -12,8 +12,8 @@ using UltraGroup.Infrastructure.DataSource;
 namespace UltraGroup.Infrastructure.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20240728154535_Travelers")]
-    partial class Travelers
+    [Migration("20240729140415_Initial")]
+    partial class Initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -101,6 +101,102 @@ namespace UltraGroup.Infrastructure.Migrations
                     b.ToTable("Hotel");
                 });
 
+            modelBuilder.Entity("UltraGroup.Domain.Reservations.Entity.EmergencyContact", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("FullName")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<DateTime>("LastModifiedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Phone")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("EmergencyContact");
+                });
+
+            modelBuilder.Entity("UltraGroup.Domain.Reservations.Entity.ReservatioinTreavelers", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("LastModifiedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid>("ReservationId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("TravelerId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ReservationId");
+
+                    b.HasIndex("TravelerId");
+
+                    b.ToTable("ReservatioinTreavelers");
+                });
+
+            modelBuilder.Entity("UltraGroup.Domain.Reservations.Entity.Reservation", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateOnly>("CheckInDate")
+                        .HasColumnType("date");
+
+                    b.Property<DateOnly>("CheckOutDate")
+                        .HasColumnType("date");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid>("EmergencyContactId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("LastModifiedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("NumberOfPersons")
+                        .HasColumnType("int");
+
+                    b.Property<Guid>("RoomId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<byte>("State")
+                        .HasColumnType("tinyint");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("EmergencyContactId");
+
+                    b.HasIndex("RoomId");
+
+                    b.ToTable("Reservation");
+                });
+
             modelBuilder.Entity("UltraGroup.Domain.Rooms.Entity.Room", b =>
                 {
                     b.Property<Guid>("Id")
@@ -124,7 +220,7 @@ namespace UltraGroup.Infrastructure.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
-                    b.Property<int>("Number")
+                    b.Property<int>("NumberOfPersons")
                         .HasColumnType("int");
 
                     b.Property<byte>("State")
@@ -205,6 +301,42 @@ namespace UltraGroup.Infrastructure.Migrations
                     b.Navigation("Agent");
                 });
 
+            modelBuilder.Entity("UltraGroup.Domain.Reservations.Entity.ReservatioinTreavelers", b =>
+                {
+                    b.HasOne("UltraGroup.Domain.Reservations.Entity.Reservation", null)
+                        .WithMany("Travelers")
+                        .HasForeignKey("ReservationId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("UltraGroup.Domain.Travelers.Entity.Traveler", "Traveler")
+                        .WithMany()
+                        .HasForeignKey("TravelerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Traveler");
+                });
+
+            modelBuilder.Entity("UltraGroup.Domain.Reservations.Entity.Reservation", b =>
+                {
+                    b.HasOne("UltraGroup.Domain.Reservations.Entity.EmergencyContact", "EmergencyContact")
+                        .WithMany()
+                        .HasForeignKey("EmergencyContactId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("UltraGroup.Domain.Rooms.Entity.Room", "Room")
+                        .WithMany()
+                        .HasForeignKey("RoomId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("EmergencyContact");
+
+                    b.Navigation("Room");
+                });
+
             modelBuilder.Entity("UltraGroup.Domain.Rooms.Entity.Room", b =>
                 {
                     b.HasOne("UltraGroup.Domain.Hotels.Entity.Hotel", "Hotel")
@@ -214,6 +346,11 @@ namespace UltraGroup.Infrastructure.Migrations
                         .IsRequired();
 
                     b.Navigation("Hotel");
+                });
+
+            modelBuilder.Entity("UltraGroup.Domain.Reservations.Entity.Reservation", b =>
+                {
+                    b.Navigation("Travelers");
                 });
 #pragma warning restore 612, 618
         }

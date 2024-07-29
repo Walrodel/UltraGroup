@@ -39,7 +39,7 @@ public static class RoomApi
 
         routeHandler.MapPut("/{id}", async (IMediator mediator, CreateRoomCommand room, Guid id) =>
         {
-            await mediator.Send(new UpdateRoomCommand(id, room.Number, room.CosBaseCost, room.Tax, room.Type, room.State, room.Location, room.HotelId));
+            await mediator.Send(new UpdateRoomCommand(id, room.NumberOfPersons, room.CosBaseCost, room.Tax, room.Type, room.State, room.Location, room.HotelId));
             return Results.Ok();
         })
        .Produces(statusCode: StatusCodes.Status200OK)

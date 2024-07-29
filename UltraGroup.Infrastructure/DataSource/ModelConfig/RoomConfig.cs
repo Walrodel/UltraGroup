@@ -17,7 +17,7 @@ namespace UltraGroup.Infrastructure.DataSource.ModelConfig
                 .HasMaxLength(MaximunLengthLocation)
                 .IsRequired();
 
-            builder.Property(room => room.Number)
+            builder.Property(room => room.NumberOfPersons)
                .HasColumnType("int")
                .IsRequired();
 

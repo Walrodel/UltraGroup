@@ -8,19 +8,19 @@ namespace UltraGroup.Domain.Rooms.Entity
         const int MinimunLengthLocation = 3;
         const int MaximunLengthLocation = 100;
 
-        int number = default;
+        int numberOfPersons = default;
         decimal baseCost = default;
         decimal tax = default;
         string location = default!;
         Hotel hotel = default!;
 
-        public required int Number
+        public required int NumberOfPersons
         {
-            get => number;
+            get => numberOfPersons;
             set
             {
-                value.ValidateGreaterThanZero("The number should be greater than zero.");
-                number = value;
+                value.ValidateGreaterThanZero("The number of persons should be greater than zero.");
+                numberOfPersons = value;
             }
         }
 
@@ -72,7 +72,7 @@ namespace UltraGroup.Domain.Rooms.Entity
         public void Update(Room room)
         {
             Id = room.Id;
-            Number = room.Number;
+            NumberOfPersons = room.NumberOfPersons;
             BaseCost = room.BaseCost;
             Tax = room.Tax;
             State = room.State;

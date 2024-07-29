@@ -1,12 +1,11 @@
 ﻿using UltraGroup.Domain.Common;
 using UltraGroup.Domain.Rooms.Entity;
-using UltraGroup.Domain.Travelers.Entity;
 
 namespace UltraGroup.Domain.Reservations.Entity
 {
     public class Reservation : DomainEntity
     {
-        Traveler traveler = default!;
+        ICollection<ReservatioinTreavelers> travelers = default!;
         Room room = default!;
         EmergencyContact emergencyContact = default!;
         short numberOfPersons = default;
@@ -37,13 +36,14 @@ namespace UltraGroup.Domain.Reservations.Entity
             }
         }
 
-        public required Traveler Traveler
+        public required ICollection<ReservatioinTreavelers> Travelers
         {
-            get => traveler;
+            get => travelers;
             set
             {
-                value.ValidateNull("The traveler does not exist.");
-                traveler = value;
+                value.ValidateNull("The travelers should not be null.");
+                value.ValidateNotEmpty("The travelers should not be empty.");
+                travelers = value;
             }
         }
 

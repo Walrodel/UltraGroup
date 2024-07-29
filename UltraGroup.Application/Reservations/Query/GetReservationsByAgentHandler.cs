@@ -15,7 +15,7 @@ namespace UltraGroup.Application.Reservations.Query
         public async Task<IEnumerable<ReservationDto>> Handle(GetReservationsByAgentQuery request, CancellationToken cancellationToken)
         {
             var reservatios = await reservationRepository.GetManyAsync(reservation => reservation.Room.Hotel.Agent.Id.Equals(request.AgentId),
-                $"{nameof(Traveler)},{nameof(Room)},{nameof(EmergencyContact)},{nameof(Room)}.{nameof(Hotel)},{nameof(Room)}.{nameof(Hotel)}.{nameof(Agent)}");
+                $"{nameof(Reservation.Travelers)}.{nameof(Traveler)},{nameof(Room)},{nameof(EmergencyContact)},{nameof(Room)}.{nameof(Hotel)},{nameof(Room)}.{nameof(Hotel)}.{nameof(Agent)}");
 
             return mapper.Map<IEnumerable<ReservationDto>>(reservatios);
         }

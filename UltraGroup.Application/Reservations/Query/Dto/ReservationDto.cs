@@ -1,5 +1,4 @@
-﻿using UltraGroup.Application.Travelers.Query.Dto;
-using UltraGroup.Domain.Reservations.Entity.Dto;
+﻿using UltraGroup.Domain.Reservations.Entity.Dto;
 using UltraGroup.Domain.Rooms.Entity.Dto;
 
 namespace UltraGroup.Application.Reservations.Query.Dto
@@ -10,7 +9,7 @@ namespace UltraGroup.Application.Reservations.Query.Dto
         DateOnly CheckOutDate,
         short NumberOfPersons,
         string State,
-        TravelerDto Traveler,
+        IEnumerable<ReservatioinTreavelersDto> Travelers,
         RoomDto Room,
         EmergencyContactDto EmergencyContact);
 }

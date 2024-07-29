@@ -5,7 +5,7 @@ namespace UltraGroup.Domain.Rooms.Entity.Dto
     public record RoomDto
     {
         public Guid Id { get; set; }
-        public int Number { get; set; }
+        public int NumberOfPersons { get; set; }
         public decimal CosBaseCost { get; set; }
         public decimal Tax { get; set; }
         public TypeRoom Type { get; set; }

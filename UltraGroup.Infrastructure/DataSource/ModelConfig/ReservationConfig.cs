@@ -27,6 +27,10 @@ namespace UltraGroup.Infrastructure.DataSource.ModelConfig
             builder.Property(room => room.State)
                .HasColumnType("tinyint")
                .IsRequired();
+
+            builder.HasMany(invoice => invoice.Travelers)
+                .WithOne()
+                .HasForeignKey(productInvoice => productInvoice.ReservationId);
         }
     }
 }

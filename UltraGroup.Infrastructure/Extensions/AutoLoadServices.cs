@@ -14,6 +14,8 @@ public static class AutoLoadServices
 
         services.AddTransient<IUnitOfWork, UnitOfWork>();
 
+        services.AddTransient<IEmailNotification, EmailNotification>();
+
         var _services = AppDomain.CurrentDomain.GetAssemblies()
               .Where(assembly =>
               {

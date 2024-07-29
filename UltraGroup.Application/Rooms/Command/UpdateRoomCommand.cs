@@ -5,7 +5,7 @@ namespace UltraGroup.Application.Rooms.Command
 {
     public record UpdateRoomCommand(
         Guid Id,
-        int Number,
+        int NumberOfPersons,
         decimal CosBaseCost,
         decimal Tax,
         TypeRoom Type,

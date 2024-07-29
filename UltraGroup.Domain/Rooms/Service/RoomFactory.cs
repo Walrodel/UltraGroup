@@ -14,7 +14,7 @@ namespace UltraGroup.Domain.Rooms.Service
             return new Room()
             {
                 Id = room.Id,
-                Number = room.Number,
+                NumberOfPersons = room.NumberOfPersons,
                 BaseCost = room.CosBaseCost,
                 Location = room.Location,
                 Tax = room.Tax,

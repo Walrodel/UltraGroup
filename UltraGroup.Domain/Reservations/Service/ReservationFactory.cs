@@ -11,7 +11,13 @@ namespace UltraGroup.Domain.Reservations.Service
     {
         public async Task<Reservation> Create(ReservationCreateDto reservationCreate)
         {
-            var traveler = await travelerRepository.GetByIdAsync(reservationCreate.TravelerId);
+            var travelers = new List<ReservatioinTreavelers>();
+            foreach (var travelerId in reservationCreate.Travelers)
+            {
+                var traveler = await travelerRepository.GetByIdAsync(travelerId);
+                travelers.Add(new ReservatioinTreavelers { Traveler = traveler });
+            }
+
             var room = await roomRepository.GetByIdAsync(reservationCreate.RoomId);
             var reservation = new Reservation
             {
@@ -20,7 +26,7 @@ namespace UltraGroup.Domain.Reservations.Service
                 CheckOutDate = reservationCreate.CheckOutDate,
                 NumberOfPersons = reservationCreate.NumberOfPersons,
                 State = ReservationState.Requested,
-                Traveler = traveler,
+                Travelers = travelers,
                 Room = room,
                 EmergencyContact = new() { FullName = reservationCreate.EmergencyContact.FullName, Phone = reservationCreate.EmergencyContact.Phone }
             };

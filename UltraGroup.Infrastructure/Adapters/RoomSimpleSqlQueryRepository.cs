@@ -20,10 +20,10 @@ namespace UltraGroup.Infrastructure.Adapters
 
             var rooms = await DbConnection
                 .QueryAsync<RoomAviableDto>(
-                @"SELECT  h.id, ha.Number, ha.BaseCost, ha.Tax, ha.Location, ha.State, h.Name as NameHotel, h.City, h.Address
+                @"SELECT  ha.id, ha.NumberOfPersons, ha.BaseCost, ha.Type, ha.Tax, ha.Location, ha.State, h.Name as NameHotel, h.City, h.Address
                 FROM Room ha 
                 left join Hotel as h on h.Id = ha.HotelId 
-                WHERE h.State = @StateHotel and ha.State = @StateRoom and h.City = @City and ha.Number >= @Number and NOT EXISTS(
+                WHERE h.State = @StateHotel and ha.State = @StateRoom and h.City = @City and ha.NumberOfPersons >= @NumberOfPersons and NOT EXISTS(
 	                SELECT RoomId 
                     FROM Reservation as r
                     WHERE RoomId = ha.Id  AND r.CheckInDate <= @CheckOutDate AND r.CheckOutDate >= @CheckInDate)",
@@ -32,7 +32,7 @@ namespace UltraGroup.Infrastructure.Adapters
                         StateHotel = StateHotel.Enabled,
                         StateRoom = StateRoom.Enabled,
                         roomQuery.City,
-                        Number = roomQuery.NumberOfPersons,
+                        roomQuery.NumberOfPersons,
                         roomQuery.CheckOutDate,
                         roomQuery.CheckInDate
                     });

@@ -4,7 +4,7 @@ using UltraGroup.Domain.Rooms.Entity;
 namespace UltraGroup.Application.Rooms.Command
 {
     public record CreateRoomCommand(
-        int Number,
+        int NumberOfPersons,
         decimal CosBaseCost,
         decimal Tax,
         TypeRoom Type,
