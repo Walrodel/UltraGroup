@@ -4,6 +4,6 @@ namespace UltraGroup.Domain.Rooms.Port
 {
     public interface IRoomSimpleQueryRepository
     {
-        Task<IEnumerable<RoomAviableDto>> GetAviavlesAsync(RoomQueryDto roomQuery);
+        Task<IEnumerable<RoomAviableDto>> GetAvailableAsync(RoomQueryDto roomQuery);
     }
 }

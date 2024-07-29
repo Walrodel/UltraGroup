@@ -10,7 +10,7 @@ namespace UltraGroup.Application.Rooms.Query
         public async Task<IEnumerable<RoomAviableDto>> Handle(GetRoomsAvailableQuery request, CancellationToken cancellationToken)
         {
             var roomQuery = mapper.Map<RoomQueryDto>(request);
-            return await roomSimpleQueryRepository.GetAviavlesAsync(roomQuery);
+            return await roomSimpleQueryRepository.GetAvailableAsync(roomQuery);
         }
     }
 }

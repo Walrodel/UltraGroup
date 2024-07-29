@@ -14,7 +14,7 @@ namespace UltraGroup.Infrastructure.Adapters
     {
         private IDbConnection DbConnection => dataContext.Database.GetDbConnection();
 
-        public async Task<IEnumerable<RoomAviableDto>> GetAviavlesAsync(RoomQueryDto roomQuery)
+        public async Task<IEnumerable<RoomAviableDto>> GetAvailableAsync(RoomQueryDto roomQuery)
         {
             SqlMapper.AddTypeHandler(new SqlDateOnlyTypeHandler());
 
